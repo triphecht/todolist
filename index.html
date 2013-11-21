@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+	<title>To-Do List - Angular test</title>
+	<meta charset="utf-8" />
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+
+	<header><p>Angular To-Do List</p></header>
+	
+	<!-- To Do List app starts here -->
+	<div id="container" ng-app="todoApp">
+
+		<!-- controller for the list -->
+		<div ng-controller="listCtrl">
+
+			<!-- options for multiple selected task items controller -->
+			<nav id="listControls" ng-controller="listOptionsCtrl">
+			<ul>
+				<li><a href="" ng-model="removeChecked" ng-disabled="true" ng-click="removeChecked()">Remove checked</a></li>
+				<li><a href="" ng-model="clearFinished" ng-disabled="true" ng-click="clearFinished()">Clear completed</a></li>
+			</ul>
+			</nav> <!-- listOptionsCtrl -->
+			
+			<!-- shows the list and individual task item UI -->
+			<ul id="taskList">
+				<li ng-repeat="task in taskList" ng-click="toggleTask(task)">
+
+					<input type="checkbox" ng-model="task.selected" ng-click="complete(task)" /> 
+
+					<span class="taskDone-{{ task.done }}">{{ task.name }}</span>
+					<a class="removeTask" ng-click="removeTask(task)">x</a>
+				</li>
+			</ul>
+			
+			<!-- adds new tasks to the task list -->
+			<form ng-submit="addTask(newTask)">
+				<input class="newTaskInput" type="text" ng-model="newTask" placeholder="Enter new task" />
+				<input class="addButton" type="submit" value="Add" />
+			</form>
+		</div> <!-- itemList -->
+	</div> <!-- container -->
+	
+	<script src="js/app.js"></script>
+</body>
+</html>
