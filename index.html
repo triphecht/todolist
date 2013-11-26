@@ -18,10 +18,12 @@
 		<div ng-controller="listCtrl">
 
 			<!-- options for multiple selected task items controller -->
-			<nav id="listControls" ng-controller="listOptionsCtrl">
+			<nav id="listControls">
 			<ul>
-				<li><a href="" ng-model="removeChecked" ng-disabled="true" ng-click="removeChecked()">Remove checked</a></li>
-				<li><a href="" ng-model="clearFinished" ng-disabled="true" ng-click="clearFinished()">Clear completed</a></li>
+				<li class="btn"><a href="" ng-model="checkAll" ng-click="checkAll()">Check all</a></li>
+				<li class="btn"><a href="" ng-model="uncheckAll" ng-click="uncheckAll()">Uncheck all</a></li>
+				<li class="btn"><a href="" ng-model="removeChecked" ng-click="removeChecked()">Remove checked</a></li>
+				<li class="btn"><a href="" ng-model="clearFinished" ng-click="clearFinished()">Clear completed</a></li>
 			</ul>
 			</nav> <!-- listOptionsCtrl -->
 			

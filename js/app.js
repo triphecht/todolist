@@ -9,53 +9,6 @@ var devMsg = function(msg) {
 }
 
 // *
-// * Mass task options controller
-// *
-todoApp.controller('listOptionsCtrl', ['$scope', function($scope) {
-
-	// *
-	// * Get rid of finished tasks
-	// *
-	$scope.clearFinished = function() {
-		$scope.callFoo = function(message) {
-			myService.devMsg('Clearing finished tasks...');
-		}
-		
-		// Loop through the task list and check to see if any of the tasks are marked as completed.
-		for(var index = 0; index < $scope.taskList.length; index++) {
-
-			// If task is marked as completed, remove the item from the task list array
-			// and move the loop index back by 1 to compensate for the removed item
-			if($scope.taskList[index].done == true) {
-				devMsg('Removing task: ' + $scope.taskList[index].name);
-
-				$scope.taskList.splice(index, 1);
-				index--;
-			}
-		}
-	}
-
-	// *
-	// * Removes the checked task items
-	// *
-	$scope.removeChecked = function() {
-		devMsg('Removing checked tasks...');
-
-    for(var index = 0; index < $scope.taskList.length; index++) {
-    	if($scope.taskList[index].selected) {
-    		devMsg('Removing ' + $scope.taskList[index].name);
-
-    		$scope.taskList.splice(index, 1);
-    		index--;
-    	}
-    }
-  }
-}]);
-
-
-
-
-// *
 // * To-Do list controller
 // *
 todoApp.controller('listCtrl', ['$scope', function($scope) {
@@ -156,6 +109,74 @@ todoApp.controller('listCtrl', ['$scope', function($scope) {
   // *
   $scope.select = function(task) {
   	task.selected = true;
+  }
+
+  // *
+	// * Get rid of finished tasks
+	// *
+	$scope.clearFinished = function() {
+		devMsg('Clearing finished tasks...')
+		
+		// Loop through the task list and check to see if any of the tasks are marked as completed.
+		for(var index = 0; index < $scope.taskList.length; index++) {
+
+			// If task is marked as completed, remove the item from the task list array
+			// and move the loop index back by 1 to compensate for the removed item
+			if($scope.taskList[index].done == true) {
+				devMsg('Removing task: ' + $scope.taskList[index].name);
+
+				$scope.taskList.splice(index, 1);
+				index--;
+			}
+		}
+
+		devMsg('...all finished tasks cleared!');
+	}
+
+	// *
+	// * Checks all task items
+	// *
+	$scope.checkAll = function() {
+		devMsg('Checking all tasks...');
+		
+		for(var index = 0; index < $scope.taskList.length; index++) {
+			$scope.select($scope.taskList[index]);
+			
+			devMsg('Checking ' + $scope.taskList[index].name);
+		}
+
+		devMsg('...All tasks checked.');
+	}
+
+	// *
+	// * Uncecks all task items
+	// *
+	$scope.uncheckAll = function() {
+		devMsg('Unchecking all tasks...');
+		
+		for(var index = 0; index < $scope.taskList.length; index++) {
+			$scope.unselect($scope.taskList[index]);
+			
+			devMsg('Unchecking ' + $scope.taskList[index].name);
+		}
+
+		devMsg('...All tasks unchecked.');
+	}
+
+	// *
+	// * Removes the checked task items
+	// *
+	$scope.removeChecked = function() {
+		devMsg('Removing checked tasks...');
+
+    for(var index = 0; index < $scope.taskList.length; index++) {
+    	if($scope.taskList[index].selected) {
+    		devMsg('Removing ' + $scope.taskList[index].name);
+
+    		$scope.taskList.splice(index, 1);
+    		index--;
+    	}
+    }
   }
 
 }]);
